@@ -19,21 +19,11 @@
             <p class="venue">WACV 2026</p>
             
             <div class="authors">
-                <span class="author">
-                    <a href="#">Juil Koo</a><sup>1*</sup>
-                </span>
-                <span class="author">
-                    <a href="#">Wei-Tung Lin</a><sup>2*</sup>
-                </span>
-                <span class="author">
-                    <a href="#">Chanho Park</a><sup>1</sup>
-                </span>
-                <span class="author">
-                    <a href="#">Chanhyeok Park</a><sup>1</sup>
-                </span>
-                <span class="author">
-                    <a href="#">Minhyuk Sung</a><sup>1</sup>
-                </span>
+                <span class="author">Juil Koo<sup>1*</sup></span>
+                <span class="author">Wei-Tung Lin<sup>2*</sup></span>
+                <span class="author">Chanho Park<sup>1</sup></span>
+                <span class="author">Chanhyeok Park<sup>1</sup></span>
+                <span class="author">Minhyuk Sung<sup>1</sup></span>
             </div>
             
             <div class="affiliations">
@@ -43,18 +33,15 @@
             <p class="equal-contrib">* Equal contribution</p>
             
             <div class="links">
-                <a href="#" class="btn">
+                <a href="assets/02785.pdf" class="btn" target="_blank">
                     <i class="fas fa-file-pdf"></i> Paper
                 </a>
-                <a href="#" class="btn">
+                <a href="assets/02785_supp.pdf" class="btn" target="_blank">
+                    <i class="fas fa-file-alt"></i> Supplementary Material
+                </a>
+                <!-- <a href="#" class="btn">
                     <i class="fab fa-github"></i> Code
-                </a>
-                <a href="#" class="btn">
-                    <i class="fab fa-youtube"></i> Video
-                </a>
-                <a href="#" class="btn">
-                    <i class="fas fa-database"></i> Data
-                </a>
+                </a> -->
             </div>
         </div>
     </header>
@@ -344,22 +331,19 @@
             <h3 class="results-subtitle">Interactive Shape Editing</h3>
             <p class="results-description">
                 Users can interactively edit 3D shapes by transforming bounding boxes. The generated shapes adapt to the modified box configurations.
-                <strong>Click to view full size.</strong>
+                <strong>Hover to view full size.</strong>
             </p>
             <div class="results-grid editing-grid">
-                <div class="result-item zoomable" onclick="openLightbox('assets/images/chair_editing.png', 'Chair back rotation')">
+                <div class="result-item hover-zoom">
                     <img src="assets/images/chair_editing.png" alt="Chair editing example">
-                    <div class="zoom-icon"><i class="fas fa-search-plus"></i></div>
                     <p class="result-caption">Chair back rotation</p>
                 </div>
-                <div class="result-item zoomable" onclick="openLightbox('assets/images/airplane_editing.png', 'Airplane wing adjustment')">
+                <div class="result-item hover-zoom">
                     <img src="assets/images/airplane_editing.png" alt="Airplane editing example">
-                    <div class="zoom-icon"><i class="fas fa-search-plus"></i></div>
                     <p class="result-caption">Airplane wing adjustment</p>
                 </div>
-                <div class="result-item zoomable" onclick="openLightbox('assets/images/sofa_editing.png', 'Sofa arm modification')">
+                <div class="result-item hover-zoom">
                     <img src="assets/images/sofa_editing.png" alt="Sofa editing example">
-                    <div class="zoom-icon"><i class="fas fa-search-plus"></i></div>
                     <p class="result-caption">Sofa arm modification</p>
                 </div>
             </div>
@@ -519,7 +503,7 @@
             });
         }
 
-        // Lightbox functions
+        // Lightbox functions (for click-based zoom if needed)
         function openLightbox(src, caption) {
             const lightbox = document.getElementById('lightbox');
             const img = document.getElementById('lightbox-img');
