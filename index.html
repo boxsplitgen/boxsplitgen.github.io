@@ -175,14 +175,7 @@
         <div class="container">
             <h2 class="section-title">Demo Video</h2>
             <div class="video-wrapper">
-                <!-- Replace VIDEO_ID with your actual YouTube video ID -->
-                <iframe 
-                    src="https://www.youtube.com/embed/VIDEO_ID" 
-                    title="BoxSplitGen Demo Video"
-                    frameborder="0" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                    allowfullscreen>
-                </iframe>
+                <iframe width="800" src="https://www.youtube.com/embed/rfI9RdKYZG4?si=oEui4WK1F-aDrblq" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
             </div>
             <p class="video-caption">3-minute demonstration of our interactive box-splitting and shape generation framework.</p>
         </div>
@@ -256,35 +249,48 @@
                 </button>
                 
                 <div class="gallery-main">
+                    <div class="gallery-headers gallery-headers-4col">
+                        <span class="gallery-header">Input Boxes</span>
+                        <span class="gallery-header">Spice-E[1]</span>
+                        <span class="gallery-header">3DShape2VecSet[2]</span>
+                        <span class="gallery-header"><strong>Ours</strong></span>
+                    </div>
                     <img src="assets/images/11_stage_2_paired.png" alt="Generation result" class="gallery-image">
                 </div>
-                
+
                 <button class="gallery-nav gallery-next" onclick="changeSlide('stage2-gallery', 1)">
                     <i class="fas fa-chevron-right"></i>
                 </button>
                 
-                <div class="gallery-thumbnails">
-                    <img src="assets/images/11_stage_2_paired.png" alt="Thumbnail 1" class="thumb active" onclick="goToSlide('stage2-gallery', 0)">
-                    <img src="assets/images/2_stage_2_paired.png" alt="Thumbnail 2" class="thumb" onclick="goToSlide('stage2-gallery', 1)">
-                    <img src="assets/images/7_stage_2_paired.png" alt="Thumbnail 3" class="thumb" onclick="goToSlide('stage2-gallery', 2)">
-                    <img src="assets/images/19_stage_2_paired.png" alt="Thumbnail 4" class="thumb" onclick="goToSlide('stage2-gallery', 3)">
-                    <img src="assets/images/23_stage_2_paired.png" alt="Thumbnail 5" class="thumb" onclick="goToSlide('stage2-gallery', 4)">
-                    <img src="assets/images/44_stage_2_paired.png" alt="Thumbnail 6" class="thumb" onclick="goToSlide('stage2-gallery', 5)">
-                    <img src="assets/images/60_stage_2_paired.png" alt="Thumbnail 7" class="thumb" onclick="goToSlide('stage2-gallery', 6)">
-                    <img src="assets/images/67_stage_2_paired.png" alt="Thumbnail 8" class="thumb" onclick="goToSlide('stage2-gallery', 7)">
-                    <img src="assets/images/77_stage_2_paired.png" alt="Thumbnail 9" class="thumb" onclick="goToSlide('stage2-gallery', 8)">
-                    <img src="assets/images/125_stage_2_paired.png" alt="Thumbnail 10" class="thumb" onclick="goToSlide('stage2-gallery', 9)">
-                    <img src="assets/images/136_stage_2_paired.png" alt="Thumbnail 11" class="thumb" onclick="goToSlide('stage2-gallery', 10)">
-                    <img src="assets/images/150_stage_2_paired.png" alt="Thumbnail 12" class="thumb" onclick="goToSlide('stage2-gallery', 11)">
-                    <img src="assets/images/179_stage_2_paired.png" alt="Thumbnail 13" class="thumb" onclick="goToSlide('stage2-gallery', 12)">
-                    <img src="assets/images/193_stage_2_paired.png" alt="Thumbnail 14" class="thumb" onclick="goToSlide('stage2-gallery', 13)">
-                    <img src="assets/images/235_stage_2_paired.png" alt="Thumbnail 15" class="thumb" onclick="goToSlide('stage2-gallery', 14)">
-                    <img src="assets/images/321_stage_2_paired.png" alt="Thumbnail 16" class="thumb" onclick="goToSlide('stage2-gallery', 15)">
+                <div class="gallery-dots">
+                    <span class="dot active" onclick="goToSlide('stage2-gallery', 0)"></span>
+                    <span class="dot" onclick="goToSlide('stage2-gallery', 1)"></span>
+                    <span class="dot" onclick="goToSlide('stage2-gallery', 2)"></span>
+                    <span class="dot" onclick="goToSlide('stage2-gallery', 3)"></span>
+                    <span class="dot" onclick="goToSlide('stage2-gallery', 4)"></span>
+                    <span class="dot" onclick="goToSlide('stage2-gallery', 5)"></span>
+                    <span class="dot" onclick="goToSlide('stage2-gallery', 6)"></span>
+                    <span class="dot" onclick="goToSlide('stage2-gallery', 7)"></span>
+                    <span class="dot" onclick="goToSlide('stage2-gallery', 8)"></span>
+                    <span class="dot" onclick="goToSlide('stage2-gallery', 9)"></span>
+                    <span class="dot" onclick="goToSlide('stage2-gallery', 10)"></span>
+                    <span class="dot" onclick="goToSlide('stage2-gallery', 11)"></span>
+                    <span class="dot" onclick="goToSlide('stage2-gallery', 12)"></span>
+                    <span class="dot" onclick="goToSlide('stage2-gallery', 13)"></span>
+                    <span class="dot" onclick="goToSlide('stage2-gallery', 14)"></span>
+                    <span class="dot" onclick="goToSlide('stage2-gallery', 15)"></span>
                 </div>
                 
                 <div class="gallery-counter">
                     <span class="current">1</span> / <span class="total">16</span>
                 </div>
+            </div>
+
+            <div class="gallery-references">
+                <p class="reference-note">
+                    [1] Sella et al., "Spice-E: Structural Priors in 3D Diffusion using Cross-Entity Attention", ACM SIGGRAPH 2024.<br>
+                    [2] Zhang et al., "3DShape2VecSet: A 3D Shape Representation for Neural Fields and Generative Diffusion Models", ACM ToG 2023.
+                </p>
             </div>
 
             <!-- Box Generation Gallery -->
@@ -294,12 +300,17 @@
                 Comparison with baselines shows our method produces more coherent part structures.
             </p>
             
-            <div class="gallery-container" id="stage1-gallery">
+            <div class="gallery-container gallery-compact" id="stage1-gallery">
                 <button class="gallery-nav gallery-prev" onclick="changeSlide('stage1-gallery', -1)">
                     <i class="fas fa-chevron-left"></i>
                 </button>
                 
                 <div class="gallery-main">
+                    <div class="gallery-headers gallery-headers-3col">
+                        <span class="gallery-header">Token Prediction</span>
+                        <span class="gallery-header">Unconditional Diffusion</span>
+                        <span class="gallery-header">Conditional Diffusion</span>
+                    </div>
                     <img src="assets/images/1_airplane_pivot_cls_5_1059_paired.png" alt="Box generation result" class="gallery-image">
                 </div>
                 
@@ -307,17 +318,25 @@
                     <i class="fas fa-chevron-right"></i>
                 </button>
                 
-                <div class="gallery-thumbnails">
-                    <img src="assets/images/1_airplane_pivot_cls_5_1059_paired.png" alt="Airplane" class="thumb active" onclick="goToSlide('stage1-gallery', 0)">
-                    <img src="assets/images/11_chair_pivot_cls_5_1489_paired.png" alt="Chair" class="thumb" onclick="goToSlide('stage1-gallery', 1)">
-                    <img src="assets/images/22_couch_pivot_cls_5_1433_paired.png" alt="Couch" class="thumb" onclick="goToSlide('stage1-gallery', 2)">
-                    <img src="assets/images/33_lamp_pivot_cls_5_1724_paired.png" alt="Lamp" class="thumb" onclick="goToSlide('stage1-gallery', 3)">
-                    <img src="assets/images/36_rifle_pivot_cls_5_219_paired.png" alt="Rifle" class="thumb" onclick="goToSlide('stage1-gallery', 4)">
-                    <img src="assets/images/38_table_pivot_cls_5_1307_paired.png" alt="Table" class="thumb" onclick="goToSlide('stage1-gallery', 5)">
-                </div>
-                
-                <div class="gallery-counter">
-                    <span class="current">1</span> / <span class="total">6</span>
+                <div class="gallery-category-tabs">
+                    <button class="category-tab active" onclick="goToSlide('stage1-gallery', 0)">
+                        <i class="fas fa-plane"></i> Airplane
+                    </button>
+                    <button class="category-tab" onclick="goToSlide('stage1-gallery', 1)">
+                        <i class="fas fa-chair"></i> Chair
+                    </button>
+                    <button class="category-tab" onclick="goToSlide('stage1-gallery', 2)">
+                        <i class="fas fa-couch"></i> Couch
+                    </button>
+                    <button class="category-tab" onclick="goToSlide('stage1-gallery', 3)">
+                        <i class="fas fa-lightbulb"></i> Lamp
+                    </button>
+                    <button class="category-tab" onclick="goToSlide('stage1-gallery', 4)">
+                        <i class="fas fa-crosshairs"></i> Rifle
+                    </button>
+                    <button class="category-tab" onclick="goToSlide('stage1-gallery', 5)">
+                        <i class="fas fa-table"></i> Table
+                    </button>
                 </div>
             </div>
 
@@ -325,23 +344,36 @@
             <h3 class="results-subtitle">Interactive Shape Editing</h3>
             <p class="results-description">
                 Users can interactively edit 3D shapes by transforming bounding boxes. The generated shapes adapt to the modified box configurations.
+                <strong>Click to view full size.</strong>
             </p>
             <div class="results-grid editing-grid">
-                <div class="result-item">
+                <div class="result-item zoomable" onclick="openLightbox('assets/images/chair_editing.png', 'Chair back rotation')">
                     <img src="assets/images/chair_editing.png" alt="Chair editing example">
+                    <div class="zoom-icon"><i class="fas fa-search-plus"></i></div>
                     <p class="result-caption">Chair back rotation</p>
                 </div>
-                <div class="result-item">
+                <div class="result-item zoomable" onclick="openLightbox('assets/images/airplane_editing.png', 'Airplane wing adjustment')">
                     <img src="assets/images/airplane_editing.png" alt="Airplane editing example">
+                    <div class="zoom-icon"><i class="fas fa-search-plus"></i></div>
                     <p class="result-caption">Airplane wing adjustment</p>
                 </div>
-                <div class="result-item">
+                <div class="result-item zoomable" onclick="openLightbox('assets/images/sofa_editing.png', 'Sofa arm modification')">
                     <img src="assets/images/sofa_editing.png" alt="Sofa editing example">
+                    <div class="zoom-icon"><i class="fas fa-search-plus"></i></div>
                     <p class="result-caption">Sofa arm modification</p>
                 </div>
             </div>
         </div>
     </section>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+        <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+        <div class="lightbox-content" onclick="event.stopPropagation()">
+            <img id="lightbox-img" src="" alt="">
+            <p id="lightbox-caption"></p>
+        </div>
+    </div>
 
     <!-- BibTeX -->
     <section class="bibtex">
@@ -353,7 +385,7 @@
                 </button>
                 <pre><code>@inproceedings{koo2026boxsplitgen,
     title={BoxSplitGen: A Generative Model for 3D Part Bounding Boxes in Varying Granularity},
-    author={Koo, Juil and Lin, Wei-Tung and Park, Chanho and Park, Chanhyeok and Sung, Minhyuk},
+    author={Juil Koo and Wei-Tung Lin and Chanho Park and Chanhyeok Park and Minhyuk Sung},
     booktitle={Proceedings of the IEEE/CVF Winter Conference on Applications of Computer Vision (WACV)},
     year={2026}
 }</code></pre>
@@ -366,7 +398,13 @@
         <div class="container">
             <h2 class="section-title">Acknowledgements</h2>
             <p>
-                This work was supported by KAIST and NVIDIA. We thank the reviewers for their valuable feedback.
+                This work was supported by the IITP
+                grants (RS-2022-00156435, RS-2024-00399817, RS-2025-
+                25441313, RS-2025-25443318, RS-2025-02653113); and
+                the Industrial Technology Innovation Program (RS-2025-
+                02317326), all funded by the Korean government (MSIT and
+                MOTIE), as well as by the DRB-KAIST SketchTheFuture
+                Research Center.
             </p>
         </div>
     </section>
@@ -423,14 +461,23 @@
             const mainImage = gallery.querySelector('.gallery-image');
             mainImage.src = state.images[state.currentIndex];
             
-            // Update thumbnails
-            const thumbs = gallery.querySelectorAll('.thumb');
-            thumbs.forEach((thumb, index) => {
-                thumb.classList.toggle('active', index === state.currentIndex);
+            // Update dots (for stage2)
+            const dots = gallery.querySelectorAll('.dot');
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === state.currentIndex);
             });
             
-            // Update counter
-            gallery.querySelector('.current').textContent = state.currentIndex + 1;
+            // Update category tabs (for stage1)
+            const tabs = gallery.querySelectorAll('.category-tab');
+            tabs.forEach((tab, index) => {
+                tab.classList.toggle('active', index === state.currentIndex);
+            });
+            
+            // Update counter if exists
+            const counter = gallery.querySelector('.current');
+            if (counter) {
+                counter.textContent = state.currentIndex + 1;
+            }
         }
 
         function changeSlide(galleryId, direction) {
@@ -471,6 +518,31 @@
                 }, 2000);
             });
         }
+
+        // Lightbox functions
+        function openLightbox(src, caption) {
+            const lightbox = document.getElementById('lightbox');
+            const img = document.getElementById('lightbox-img');
+            const cap = document.getElementById('lightbox-caption');
+            
+            img.src = src;
+            cap.textContent = caption;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Close lightbox on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeLightbox();
+            }
+        });
     </script>
 </body>
 </html>
