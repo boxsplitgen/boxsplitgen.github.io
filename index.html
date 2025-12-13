@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
@@ -18,45 +18,29 @@
             <h2 class="subtitle">A Generative Model for 3D Part Bounding Boxes in Varying Granularity</h2>
             <p class="venue">WACV 2026</p>
             
-            <div class="authors">
-                <span class="author">Juil Koo<sup>1*</sup></span>
-                <span class="author">Wei-Tung Lin<sup>2*</sup></span>
-                <span class="author">Chanho Park<sup>1</sup></span>
-                <span class="author">Chanhyeok Park<sup>1</sup></span>
+            <p class="authors">
+                <span class="author">Juil Koo<sup>1*</sup></span>,
+                <span class="author">Wei-Tung Lin<sup>2*</sup></span>,
+                <span class="author">Chanho Park<sup>1</sup></span>,
+                <span class="author">Chanhyeok Park<sup>1</sup></span>,
                 <span class="author">Minhyuk Sung<sup>1</sup></span>
-            </div>
+            </p>
             
-            <div class="affiliations">
-                <span class="affiliation"><sup>1</sup>KAIST</span>
-                <span class="affiliation"><sup>2</sup>NVIDIA</span>
-            </div>
-            <p class="equal-contrib">* Equal contribution</p>
+            <p class="affiliations">
+                <sup>1</sup>KAIST, <sup>2</sup>NVIDIA
+            </p>
+            <p class="equal-contrib">(* indicates equal contribution)</p>
             
             <div class="links">
                 <a href="assets/02785.pdf" class="btn" target="_blank">
                     <i class="fas fa-file-pdf"></i> Paper
                 </a>
                 <a href="assets/02785_supp.pdf" class="btn" target="_blank">
-                    <i class="fas fa-file-alt"></i> Supplementary Material
+                    <i class="fas fa-file-alt"></i> Supp
                 </a>
-                <!-- <a href="#" class="btn">
-                    <i class="fab fa-github"></i> Code
-                </a> -->
             </div>
         </div>
     </header>
-
-    <!-- Teaser -->
-    <section class="teaser">
-        <div class="container">
-            <img src="assets/images/boxsplitgen_teaser.png" alt="BoxSplitGen Teaser" class="teaser-image">
-            <p class="teaser-caption">
-                <strong>Overview of our box-splitting-based 3D shape generative framework.</strong> 
-                The left shows our iterative box splitting and box-to-shape generation, where diverse shapes at the top of the tree become increasingly specific deeper in the tree. 
-                The right showcases our user-interactive box and shape editing demo.
-            </p>
-        </div>
-    </section>
 
     <!-- Abstract -->
     <section class="abstract">
@@ -66,153 +50,77 @@
                 Human creativity follows a perceptual process, moving from abstract ideas to finer details during creation. 
                 While 3D generative models have advanced dramatically, models specifically designed to assist human imagination 
                 in 3D creation—particularly for detailing abstractions from coarse to fine—have not been explored. 
-                We propose a framework that enables intuitive and interactive 3D shape generation by iteratively splitting 
-                bounding boxes to refine the set of bounding boxes. The main technical components of our framework are two 
+                We propose a framework that enables intuitive and interactive 3D shape generation by <strong>iteratively splitting 
+                bounding boxes</strong> to refine the set of bounding boxes. The main technical components of our framework are two 
                 generative models: the <strong>box-splitting generative model</strong> and the <strong>box-to-shape generative model</strong>. 
                 The first model, named <em>BoxSplitGen</em>, generates a collection of 3D part bounding boxes with varying granularity 
-                by iteratively splitting coarse bounding boxes. It utilizes part bounding boxes created through agglomerative merging 
-                and learns the reverse of the merging process—the splitting sequences. The model consists of two main components: 
-                the first learns the categorical distribution of the box to be split, and the second learns the distribution of the 
-                two new boxes, given the set of boxes and the indication of which box to split. The second model, the box-to-shape 
-                generative model, is trained by leveraging the 3D shape priors learned by an existing 3D diffusion model while 
-                adapting the model to incorporate bounding box conditioning. In our experiments, we demonstrate that the box-splitting 
-                generative model outperforms token prediction models and the inpainting approach with an unconditional diffusion model. 
-                Also, we show that our box-to-shape model, based on a state-of-the-art 3D diffusion model, provides superior results 
-                compared to a previous model.
+                by iteratively splitting coarse bounding boxes. The second model, the box-to-shape generative model, is trained by 
+                leveraging the 3D shape priors learned by an existing 3D diffusion model while adapting the model to incorporate 
+                bounding box conditioning.
             </p>
-        </div>
-    </section>
-
-    <!-- Main Ideas -->
-    <section class="main-ideas">
-        <div class="container">
-            <h2 class="section-title">Our Main Ideas</h2>
-            <p class="section-intro">
-                We introduce a novel approach to 3D shape generation that mirrors how humans naturally think about objects—starting from a rough idea and progressively adding detail.
-            </p>
-            
-            <div class="ideas-grid">
-                <div class="idea-card">
-                    <div class="idea-icon">
-                        <i class="fas fa-sitemap"></i>
-                    </div>
-                    <h3>Hierarchical Box Splitting</h3>
-                    <p>
-                        Instead of generating all parts at once, we <strong>iteratively split</strong> a single bounding box into finer parts. 
-                        This creates a natural hierarchy: start with one box representing the whole object, then split it to reveal structure 
-                        (e.g., seat vs. back for a chair), and continue splitting to add more detail.
-                    </p>
-                </div>
-                
-                <div class="idea-card">
-                    <div class="idea-icon">
-                        <i class="fas fa-random"></i>
-                    </div>
-                    <h3>Coarse-to-Fine Control</h3>
-                    <p>
-                        Users can <strong>stop at any granularity level</strong>. Want a general chair shape? Use fewer boxes. 
-                        Need precise control over armrests and legs? Keep splitting. This gives unprecedented control over 
-                        the level of detail in 3D generation.
-                    </p>
-                </div>
-                
-                <div class="idea-card">
-                    <div class="idea-icon">
-                        <i class="fas fa-project-diagram"></i>
-                    </div>
-                    <h3>Two-Stage Generation</h3>
-                    <p>
-                        <strong>Stage 1 (BoxSplitGen):</strong> A classifier decides which box to split next, then a diffusion model 
-                        generates the two child boxes. This learns the reverse of hierarchical merging.<br><br>
-                        <strong>Stage 2 (Box-to-Shape):</strong> Given the final set of boxes, a conditioned 3D diffusion model 
-                        generates the detailed mesh that fits within the boxes.
-                    </p>
-                </div>
-                
-                <div class="idea-card">
-                    <div class="idea-icon">
-                        <i class="fas fa-hand-pointer"></i>
-                    </div>
-                    <h3>Interactive Editing</h3>
-                    <p>
-                        Since shapes are defined by bounding boxes, users can <strong>directly manipulate parts</strong>: 
-                        rotate a chair's backrest, stretch table legs, or resize airplane wings. 
-                        The model regenerates shapes that respect these modifications.
-                    </p>
-                </div>
-            </div>
-            
-            <div class="key-insight">
-                <div class="insight-icon">💡</div>
-                <div class="insight-content">
-                    <h4>Key Insight</h4>
-                    <p>
-                        Traditional methods generate all parts simultaneously, making it hard to control granularity. 
-                        Our splitting approach naturally produces a <strong>tree of possibilities</strong>: 
-                        the same coarse boxes can lead to many different fine-grained results, 
-                        enabling exploration of the design space at every level.
-                    </p>
-                </div>
-            </div>
         </div>
     </section>
 
     <!-- Video -->
-    <section class="video">
+    <section class="video-section">
         <div class="container">
-            <h2 class="section-title">Demo Video</h2>
             <div class="video-wrapper">
-                <iframe width="800" src="https://www.youtube.com/embed/rfI9RdKYZG4?si=oEui4WK1F-aDrblq" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                <video controls playsinline>
+                    <source src="assets/demo.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
             </div>
-            <p class="video-caption">3-minute demonstration of our interactive box-splitting and shape generation framework.</p>
         </div>
     </section>
 
-    <!-- Method -->
+    <!-- Teaser -->
+    <section class="teaser">
+        <div class="container">
+            <img src="assets/images/boxsplitgen_teaser.png" alt="BoxSplitGen Teaser" class="teaser-image zoomable-img">
+            <p class="teaser-caption">
+                <strong>Overview of our box-splitting-based 3D shape generative framework.</strong> 
+                The left shows our iterative box splitting and box-to-shape generation, where diverse shapes at the top of the tree become increasingly specific deeper in the tree. 
+                The right showcases our user-interactive box and shape editing demo.
+            </p>
+        </div>
+    </section>
+
+    <!-- Method Overview -->
     <section class="method">
         <div class="container">
             <h2 class="section-title">Method Overview</h2>
-            <div class="method-content">
-                <div class="method-text">
+            
+            <div class="method-grid">
+                <div class="method-item">
+                    <h3>Hierarchical Box Splitting</h3>
+                    <p>
+                        Instead of generating all parts at once, we <strong>iteratively split</strong> a single bounding box into finer parts. 
+                        This creates a natural hierarchy from coarse to fine, enabling exploration of the design space at every level.
+                    </p>
+                </div>
+                
+                <div class="method-item">
                     <h3>Two-Stage Framework</h3>
                     <p>
-                        Our framework consists of two main generative models working in tandem:
+                        <strong>Stage 1 (BoxSplitGen):</strong> A classifier decides which box to split, then a diffusion model generates the two child boxes.<br>
+                        <strong>Stage 2 (Box-to-Shape):</strong> A conditioned 3D diffusion model generates detailed meshes that fit within the boxes.
                     </p>
-                    <ul>
-                        <li>
-                            <strong>Stage 1: BoxSplitGen</strong> — A box-splitting generative model that iteratively 
-                            splits coarse bounding boxes into finer-grained parts. It uses a classifier to select 
-                            which box to split and a diffusion model to generate the two resulting boxes.
-                        </li>
-                        <li>
-                            <strong>Stage 2: Box-to-Shape Generation</strong> — Given a set of part bounding boxes, 
-                            this model generates detailed 3D shapes by conditioning a pre-trained 3D diffusion model 
-                            on the bounding box layout.
-                        </li>
-                    </ul>
                 </div>
-                <div class="method-diagram">
-                    <div class="pipeline-steps">
-                        <div class="step">
-                            <div class="step-icon">📦</div>
-                            <div class="step-label">Single Box</div>
-                        </div>
-                        <div class="arrow">→</div>
-                        <div class="step">
-                            <div class="step-icon">🔀</div>
-                            <div class="step-label">Split</div>
-                        </div>
-                        <div class="arrow">→</div>
-                        <div class="step">
-                            <div class="step-icon">📦📦</div>
-                            <div class="step-label">Part Boxes</div>
-                        </div>
-                        <div class="arrow">→</div>
-                        <div class="step">
-                            <div class="step-icon">🎨</div>
-                            <div class="step-label">3D Shape</div>
-                        </div>
-                    </div>
+                
+                <div class="method-item">
+                    <h3>Coarse-to-Fine Control</h3>
+                    <p>
+                        Users can <strong>stop at any granularity level</strong>. Want a general chair shape? Use fewer boxes. 
+                        Need precise control over armrests and legs? Keep splitting for more detail.
+                    </p>
+                </div>
+                
+                <div class="method-item">
+                    <h3>Interactive Editing</h3>
+                    <p>
+                        Since shapes are defined by bounding boxes, users can <strong>directly manipulate parts</strong>: 
+                        rotate a chair's backrest, stretch table legs, or resize airplane wings.
+                    </p>
                 </div>
             </div>
         </div>
@@ -226,147 +134,151 @@
             <!-- Box-to-Shape Gallery -->
             <h3 class="results-subtitle">Box-to-Shape Generation</h3>
             <p class="results-description">
-                Given part bounding boxes (left), our model generates diverse and high-quality 3D shapes (right) that faithfully follow the box layout. 
-                <strong>Use the arrows or click thumbnails to browse.</strong>
+                Given part bounding boxes (left), our model generates diverse and high-quality 3D shapes (right) that faithfully follow the box layout.
             </p>
             
-            <div class="gallery-container" id="stage2-gallery">
-                <button class="gallery-nav gallery-prev" onclick="changeSlide('stage2-gallery', -1)">
-                    <i class="fas fa-chevron-left"></i>
-                </button>
-                
-                <div class="gallery-main">
-                    <div class="gallery-headers gallery-headers-4col">
-                        <span class="gallery-header">Input Boxes</span>
-                        <span class="gallery-header">Spice-E[1]</span>
-                        <span class="gallery-header">3DShape2VecSet[2]</span>
-                        <span class="gallery-header"><strong>Ours</strong></span>
+            <div class="gallery-grid" id="stage2-gallery">
+                <div class="gallery-item">
+                    <div class="gallery-headers">
+                        <span>Input</span>
+                        <span>Spice-E</span>
+                        <span>3DS2VS</span>
+                        <span><strong>Ours</strong></span>
                     </div>
-                    <img src="assets/images/11_stage_2_paired.png" alt="Generation result" class="gallery-image">
+                    <img src="assets/images/11_stage_2_paired.png" alt="Generation result">
                 </div>
-
-                <button class="gallery-nav gallery-next" onclick="changeSlide('stage2-gallery', 1)">
-                    <i class="fas fa-chevron-right"></i>
-                </button>
-                
-                <div class="gallery-dots">
-                    <span class="dot active" onclick="goToSlide('stage2-gallery', 0)"></span>
-                    <span class="dot" onclick="goToSlide('stage2-gallery', 1)"></span>
-                    <span class="dot" onclick="goToSlide('stage2-gallery', 2)"></span>
-                    <span class="dot" onclick="goToSlide('stage2-gallery', 3)"></span>
-                    <span class="dot" onclick="goToSlide('stage2-gallery', 4)"></span>
-                    <span class="dot" onclick="goToSlide('stage2-gallery', 5)"></span>
-                    <span class="dot" onclick="goToSlide('stage2-gallery', 6)"></span>
-                    <span class="dot" onclick="goToSlide('stage2-gallery', 7)"></span>
-                    <span class="dot" onclick="goToSlide('stage2-gallery', 8)"></span>
-                    <span class="dot" onclick="goToSlide('stage2-gallery', 9)"></span>
-                    <span class="dot" onclick="goToSlide('stage2-gallery', 10)"></span>
-                    <span class="dot" onclick="goToSlide('stage2-gallery', 11)"></span>
-                    <span class="dot" onclick="goToSlide('stage2-gallery', 12)"></span>
-                    <span class="dot" onclick="goToSlide('stage2-gallery', 13)"></span>
-                    <span class="dot" onclick="goToSlide('stage2-gallery', 14)"></span>
-                    <span class="dot" onclick="goToSlide('stage2-gallery', 15)"></span>
+                <div class="gallery-item">
+                    <div class="gallery-headers">
+                        <span>Input</span>
+                        <span>Spice-E</span>
+                        <span>3DS2VS</span>
+                        <span><strong>Ours</strong></span>
+                    </div>
+                    <img src="assets/images/2_stage_2_paired.png" alt="Generation result">
                 </div>
-                
-                <div class="gallery-counter">
-                    <span class="current">1</span> / <span class="total">16</span>
+                <div class="gallery-item">
+                    <div class="gallery-headers">
+                        <span>Input</span>
+                        <span>Spice-E</span>
+                        <span>3DS2VS</span>
+                        <span><strong>Ours</strong></span>
+                    </div>
+                    <img src="assets/images/7_stage_2_paired.png" alt="Generation result">
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-headers">
+                        <span>Input</span>
+                        <span>Spice-E</span>
+                        <span>3DS2VS</span>
+                        <span><strong>Ours</strong></span>
+                    </div>
+                    <img src="assets/images/19_stage_2_paired.png" alt="Generation result">
                 </div>
             </div>
-
-            <div class="gallery-references">
-                <p class="reference-note">
-                    [1] Sella et al., "Spice-E: Structural Priors in 3D Diffusion using Cross-Entity Attention", ACM SIGGRAPH 2024.<br>
-                    [2] Zhang et al., "3DShape2VecSet: A 3D Shape Representation for Neural Fields and Generative Diffusion Models", ACM ToG 2023.
-                </p>
+            
+            <div class="gallery-nav-container">
+                <button class="gallery-btn" onclick="prevPage('stage2')">← Prev</button>
+                <span class="gallery-page" id="stage2-page">1 / 4</span>
+                <button class="gallery-btn" onclick="nextPage('stage2')">Next →</button>
             </div>
+
+            <p class="references">
+                Spice-E: Sella et al., ACM SIGGRAPH 2024. &nbsp;|&nbsp; 3DS2VS: Zhang et al., ACM ToG 2023.
+            </p>
 
             <!-- Box Generation Gallery -->
             <h3 class="results-subtitle">Box Generation (Stage 1)</h3>
             <p class="results-description">
-                Our BoxSplitGen model generates semantically meaningful part bounding boxes through iterative splitting. 
-                Comparison with baselines shows our method produces more coherent part structures.
+                Our BoxSplitGen model generates semantically meaningful part bounding boxes through iterative splitting.
             </p>
             
-            <div class="gallery-container gallery-compact" id="stage1-gallery">
-                <button class="gallery-nav gallery-prev" onclick="changeSlide('stage1-gallery', -1)">
-                    <i class="fas fa-chevron-left"></i>
-                </button>
-                
-                <div class="gallery-main">
-                    <div class="gallery-headers gallery-headers-3col">
-                        <span class="gallery-header">Token Prediction</span>
-                        <span class="gallery-header">Unconditional Diffusion</span>
-                        <span class="gallery-header">Conditional Diffusion</span>
+            <div class="gallery-grid gallery-grid-3" id="stage1-gallery">
+                <div class="gallery-item">
+                    <div class="gallery-headers gallery-headers-3">
+                        <span>Token</span>
+                        <span>Uncond</span>
+                        <span>Cond</span>
                     </div>
-                    <img src="assets/images/1_airplane_pivot_cls_5_1059_paired.png" alt="Box generation result" class="gallery-image">
+                    <img src="assets/images/1_airplane_pivot_cls_5_1059_paired.png" alt="Airplane">
+                    <p class="gallery-label">Airplane</p>
                 </div>
-                
-                <button class="gallery-nav gallery-next" onclick="changeSlide('stage1-gallery', 1)">
-                    <i class="fas fa-chevron-right"></i>
-                </button>
-                
-                <div class="gallery-category-tabs">
-                    <button class="category-tab active" onclick="goToSlide('stage1-gallery', 0)">
-                        <i class="fas fa-plane"></i> Airplane
-                    </button>
-                    <button class="category-tab" onclick="goToSlide('stage1-gallery', 1)">
-                        <i class="fas fa-chair"></i> Chair
-                    </button>
-                    <button class="category-tab" onclick="goToSlide('stage1-gallery', 2)">
-                        <i class="fas fa-couch"></i> Couch
-                    </button>
-                    <button class="category-tab" onclick="goToSlide('stage1-gallery', 3)">
-                        <i class="fas fa-lightbulb"></i> Lamp
-                    </button>
-                    <button class="category-tab" onclick="goToSlide('stage1-gallery', 4)">
-                        <i class="fas fa-crosshairs"></i> Rifle
-                    </button>
-                    <button class="category-tab" onclick="goToSlide('stage1-gallery', 5)">
-                        <i class="fas fa-table"></i> Table
-                    </button>
+                <div class="gallery-item">
+                    <div class="gallery-headers gallery-headers-3">
+                        <span>Token</span>
+                        <span>Uncond</span>
+                        <span>Cond</span>
+                    </div>
+                    <img src="assets/images/11_chair_pivot_cls_5_1489_paired.png" alt="Chair">
+                    <p class="gallery-label">Chair</p>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-headers gallery-headers-3">
+                        <span>Token</span>
+                        <span>Uncond</span>
+                        <span>Cond</span>
+                    </div>
+                    <img src="assets/images/22_couch_pivot_cls_5_1433_paired.png" alt="Couch">
+                    <p class="gallery-label">Couch</p>
+                </div>
+            </div>
+
+            <div class="gallery-grid gallery-grid-3" style="margin-top: 20px;">
+                <div class="gallery-item">
+                    <div class="gallery-headers gallery-headers-3">
+                        <span>Token</span>
+                        <span>Uncond</span>
+                        <span>Cond</span>
+                    </div>
+                    <img src="assets/images/33_lamp_pivot_cls_5_1724_paired.png" alt="Lamp">
+                    <p class="gallery-label">Lamp</p>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-headers gallery-headers-3">
+                        <span>Token</span>
+                        <span>Uncond</span>
+                        <span>Cond</span>
+                    </div>
+                    <img src="assets/images/36_rifle_pivot_cls_5_219_paired.png" alt="Rifle">
+                    <p class="gallery-label">Rifle</p>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-headers gallery-headers-3">
+                        <span>Token</span>
+                        <span>Uncond</span>
+                        <span>Cond</span>
+                    </div>
+                    <img src="assets/images/38_table_pivot_cls_5_1307_paired.png" alt="Table">
+                    <p class="gallery-label">Table</p>
                 </div>
             </div>
 
             <!-- Interactive Editing -->
             <h3 class="results-subtitle">Interactive Shape Editing</h3>
             <p class="results-description">
-                Users can interactively edit 3D shapes by transforming bounding boxes. The generated shapes adapt to the modified box configurations.
-                <strong>Hover to view full size.</strong>
+                Users can interactively edit 3D shapes by transforming bounding boxes.
             </p>
-            <div class="results-grid editing-grid">
-                <div class="result-item hover-zoom">
+            <div class="editing-grid">
+                <div class="editing-item">
                     <img src="assets/images/chair_editing.png" alt="Chair editing example">
-                    <p class="result-caption">Chair back rotation</p>
+                    <p>Chair back rotation</p>
                 </div>
-                <div class="result-item hover-zoom">
+                <div class="editing-item">
                     <img src="assets/images/airplane_editing.png" alt="Airplane editing example">
-                    <p class="result-caption">Airplane wing adjustment</p>
+                    <p>Airplane wing adjustment</p>
                 </div>
-                <div class="result-item hover-zoom">
+                <div class="editing-item">
                     <img src="assets/images/sofa_editing.png" alt="Sofa editing example">
-                    <p class="result-caption">Sofa arm modification</p>
+                    <p>Sofa arm modification</p>
                 </div>
             </div>
         </div>
     </section>
-
-    <!-- Lightbox Modal -->
-    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
-        <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
-        <div class="lightbox-content" onclick="event.stopPropagation()">
-            <img id="lightbox-img" src="" alt="">
-            <p id="lightbox-caption"></p>
-        </div>
-    </div>
 
     <!-- BibTeX -->
     <section class="bibtex">
         <div class="container">
             <h2 class="section-title">BibTeX</h2>
             <div class="bibtex-wrapper">
-                <button class="copy-btn" onclick="copyBibtex()">
-                    <i class="fas fa-copy"></i> Copy
-                </button>
                 <pre><code>@inproceedings{koo2026boxsplitgen,
     title={BoxSplitGen: A Generative Model for 3D Part Bounding Boxes in Varying Granularity},
     author={Juil Koo and Wei-Tung Lin and Chanho Park and Chanhyeok Park and Minhyuk Sung},
@@ -380,152 +292,109 @@
     <!-- Acknowledgements -->
     <section class="acknowledgements">
         <div class="container">
-            <h2 class="section-title">Acknowledgements</h2>
             <p>
-                This work was supported by the IITP
-                grants (RS-2022-00156435, RS-2024-00399817, RS-2025-
-                25441313, RS-2025-25443318, RS-2025-02653113); and
-                the Industrial Technology Innovation Program (RS-2025-
-                02317326), all funded by the Korean government (MSIT and
-                MOTIE), as well as by the DRB-KAIST SketchTheFuture
-                Research Center.
+                This work was supported by the IITP grants (RS-2022-00156435, RS-2024-00399817, RS-2025-25441313, RS-2025-25443318, RS-2025-02653113); 
+                and the Industrial Technology Innovation Program (RS-2025-02317326), all funded by the Korean government (MSIT and MOTIE), 
+                as well as by the DRB-KAIST SketchTheFuture Research Center.
             </p>
         </div>
     </section>
 
+    <!-- Zoom Overlay -->
+    <div class="zoom-overlay" id="zoom-overlay"></div>
+
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <p>© 2026 BoxSplitGen. Template inspired by academic project pages.</p>
+            <p>This website is licensed under a <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative Commons Attribution-ShareAlike 4.0 International License</a>.</p>
         </div>
     </footer>
 
     <script>
-        // Gallery state
-        const galleries = {
-            'stage2-gallery': {
-                currentIndex: 0,
-                images: [
-                    'assets/images/11_stage_2_paired.png',
-                    'assets/images/2_stage_2_paired.png',
-                    'assets/images/7_stage_2_paired.png',
-                    'assets/images/19_stage_2_paired.png',
-                    'assets/images/23_stage_2_paired.png',
-                    'assets/images/44_stage_2_paired.png',
-                    'assets/images/60_stage_2_paired.png',
-                    'assets/images/67_stage_2_paired.png',
-                    'assets/images/77_stage_2_paired.png',
-                    'assets/images/125_stage_2_paired.png',
-                    'assets/images/136_stage_2_paired.png',
-                    'assets/images/150_stage_2_paired.png',
-                    'assets/images/179_stage_2_paired.png',
-                    'assets/images/193_stage_2_paired.png',
-                    'assets/images/235_stage_2_paired.png',
-                    'assets/images/321_stage_2_paired.png'
-                ]
-            },
-            'stage1-gallery': {
-                currentIndex: 0,
-                images: [
-                    'assets/images/1_airplane_pivot_cls_5_1059_paired.png',
-                    'assets/images/11_chair_pivot_cls_5_1489_paired.png',
-                    'assets/images/22_couch_pivot_cls_5_1433_paired.png',
-                    'assets/images/33_lamp_pivot_cls_5_1724_paired.png',
-                    'assets/images/36_rifle_pivot_cls_5_219_paired.png',
-                    'assets/images/38_table_pivot_cls_5_1307_paired.png'
-                ]
-            }
-        };
-
-        function updateGallery(galleryId) {
-            const gallery = document.getElementById(galleryId);
-            const state = galleries[galleryId];
-            
-            // Update main image
-            const mainImage = gallery.querySelector('.gallery-image');
-            mainImage.src = state.images[state.currentIndex];
-            
-            // Update dots (for stage2)
-            const dots = gallery.querySelectorAll('.dot');
-            dots.forEach((dot, index) => {
-                dot.classList.toggle('active', index === state.currentIndex);
+        // Gallery pagination
+        const stage2Images = [
+            ['assets/images/11_stage_2_paired.png', 'assets/images/2_stage_2_paired.png', 'assets/images/7_stage_2_paired.png', 'assets/images/19_stage_2_paired.png'],
+            ['assets/images/23_stage_2_paired.png', 'assets/images/44_stage_2_paired.png', 'assets/images/60_stage_2_paired.png', 'assets/images/67_stage_2_paired.png'],
+            ['assets/images/77_stage_2_paired.png', 'assets/images/125_stage_2_paired.png', 'assets/images/136_stage_2_paired.png', 'assets/images/150_stage_2_paired.png'],
+            ['assets/images/179_stage_2_paired.png', 'assets/images/193_stage_2_paired.png', 'assets/images/235_stage_2_paired.png', 'assets/images/321_stage_2_paired.png']
+        ];
+        
+        let stage2Page = 0;
+        
+        function updateStage2Gallery() {
+            const gallery = document.getElementById('stage2-gallery');
+            const items = gallery.querySelectorAll('.gallery-item img');
+            const images = stage2Images[stage2Page];
+            items.forEach((img, i) => {
+                img.src = images[i];
             });
-            
-            // Update category tabs (for stage1)
-            const tabs = gallery.querySelectorAll('.category-tab');
-            tabs.forEach((tab, index) => {
-                tab.classList.toggle('active', index === state.currentIndex);
+            document.getElementById('stage2-page').textContent = `${stage2Page + 1} / ${stage2Images.length}`;
+        }
+        
+        function nextPage(gallery) {
+            if (gallery === 'stage2') {
+                stage2Page = (stage2Page + 1) % stage2Images.length;
+                updateStage2Gallery();
+            }
+        }
+        
+        function prevPage(gallery) {
+            if (gallery === 'stage2') {
+                stage2Page = (stage2Page - 1 + stage2Images.length) % stage2Images.length;
+                updateStage2Gallery();
+            }
+        }
+
+        // Click-to-zoom functionality (desktop only)
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add zoomable-img class to all gallery and editing images
+            document.querySelectorAll('.gallery-item img, .editing-item img').forEach(function(img) {
+                img.classList.add('zoomable-img');
             });
-            
-            // Update counter if exists
-            const counter = gallery.querySelector('.current');
-            if (counter) {
-                counter.textContent = state.currentIndex + 1;
+
+            // Only enable on desktop (width > 768px)
+            if (window.innerWidth <= 768) return;
+
+            const overlay = document.getElementById('zoom-overlay');
+
+            function closeZoom() {
+                document.querySelectorAll('.zoomable-img.zoomed').forEach(function(zoomed) {
+                    zoomed.classList.remove('zoomed');
+                });
+                overlay.classList.remove('active');
             }
-        }
 
-        function changeSlide(galleryId, direction) {
-            const state = galleries[galleryId];
-            state.currentIndex += direction;
-            
-            if (state.currentIndex >= state.images.length) {
-                state.currentIndex = 0;
-            } else if (state.currentIndex < 0) {
-                state.currentIndex = state.images.length - 1;
-            }
-            
-            updateGallery(galleryId);
-        }
-
-        function goToSlide(galleryId, index) {
-            galleries[galleryId].currentIndex = index;
-            updateGallery(galleryId);
-        }
-
-        // Keyboard navigation
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowLeft') {
-                changeSlide('stage2-gallery', -1);
-            } else if (e.key === 'ArrowRight') {
-                changeSlide('stage2-gallery', 1);
-            }
-        });
-
-        // Copy BibTeX
-        function copyBibtex() {
-            const bibtex = document.querySelector('.bibtex pre code').innerText;
-            navigator.clipboard.writeText(bibtex).then(() => {
-                const btn = document.querySelector('.copy-btn');
-                btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
-                setTimeout(() => {
-                    btn.innerHTML = '<i class="fas fa-copy"></i> Copy';
-                }, 2000);
+            document.addEventListener('click', function(e) {
+                const img = e.target;
+                
+                // Check if clicked element is a zoomable image
+                if (img.classList.contains('zoomable-img')) {
+                    e.stopPropagation();
+                    
+                    // Toggle zoomed state
+                    if (img.classList.contains('zoomed')) {
+                        closeZoom();
+                    } else {
+                        // Close any other zoomed images first
+                        closeZoom();
+                        img.classList.add('zoomed');
+                        overlay.classList.add('active');
+                    }
+                } else if (e.target === overlay) {
+                    // Click on overlay - close
+                    closeZoom();
+                } else {
+                    // Click outside - close all zoomed images
+                    closeZoom();
+                }
             });
-        }
 
-        // Lightbox functions (for click-based zoom if needed)
-        function openLightbox(src, caption) {
-            const lightbox = document.getElementById('lightbox');
-            const img = document.getElementById('lightbox-img');
-            const cap = document.getElementById('lightbox-caption');
-            
-            img.src = src;
-            cap.textContent = caption;
-            lightbox.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeLightbox() {
-            const lightbox = document.getElementById('lightbox');
-            lightbox.classList.remove('active');
-            document.body.style.overflow = '';
-        }
-
-        // Close lightbox on Escape key
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                closeLightbox();
-            }
+            // Close on Escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    closeZoom();
+                }
+            });
         });
     </script>
 </body>
